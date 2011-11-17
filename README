@@ -31,5 +31,5 @@ $kklayout->initialize ();
 while ( ! $kklayout->done () ) {
     $kklayout->step ();
 }
-
+//var_dump($kklayout->xydata);exit;
 ?>
