@@ -1,0 +1,35 @@
+
+This is a php version implemention of the Kamada-Kawai algorithm for force directed graph layout.
+Does not respect filter calls, and sometimes crashes when the view changes to it.
+
+see "Tomihisa Kamada and Satoru Kawai: An algorithm for drawing general indirect graphs. Information Processing Letters 31(1):7-15, 1989" 
+see "Tomihisa Kamada: On visualization of abstract objects and relations. Ph.D. dissertation, Dept. of Information Science, Univ. of Tokyo, Dec. 1988."
+
+author ggsonic
+
+*the getDistance function needs to be hacked. For now, it is just a very simple strategy to get the weight of distance
+
+code sample to use:
+<?php
+
+$nodes = array();
+
+/* Create 11 random nodes */ 
+for($i=0;$i<=10;$i++)
+{
+    $Connections = ""; $RandCx1 = rand(0,1);
+    for($j=0;$j<=$RandCx1;$j++)
+    {
+        $RandCx2 = rand(0,10);
+        if ( $RandCx2 != $j )
+        { $Connections[] = $RandCx2; }
+    }
+    $nodes[$i] = array('idx' => $i, "conn" => $Connections);
+}
+$kklayout = new KKLayout ( $nodes );
+$kklayout->initialize ();
+while ( ! $kklayout->done () ) {
+    $kklayout->step ();
+}
+
+?>
